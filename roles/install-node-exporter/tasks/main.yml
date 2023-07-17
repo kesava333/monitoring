@@ -1,5 +1,5 @@
 ---
-- name: Install Node Exporter
+- name: Install the node exporter software
   hosts: your_ubuntu_hosts
   become: true
   tasks:
