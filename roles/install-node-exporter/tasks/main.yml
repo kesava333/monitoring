@@ -32,7 +32,7 @@
         enabled: yes
         state: started
         #user: node_exporter
-        #executable: /opt/node_exporter/node_exporter
+        executable: /opt/node_exporter/node_exporter
 
     - name: Open port for Node Exporter
       ufw:
