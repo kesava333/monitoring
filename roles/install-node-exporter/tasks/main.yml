@@ -1,6 +1,4 @@
 ---
-- name: Install the node exporter software
-  become: true
   tasks:
     - name: Download Node Exporter archive
       get_url:
