@@ -1,41 +1,33 @@
----
-    - name: Download Node Exporter archive
+vars:
+    node_exporter_version: 1.1.2
+  tasks:
+    - name: download node exporter
       get_url:
-        url: "https://github.com/prometheus/node_exporter/releases/download/v1.2.0/node_exporter-1.2.0.linux-amd64.tar.gz"
-        dest: "/tmp/node_exporter.tar.gz"
-
-    - name: Extract Node Exporter archive
+        url: https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+        dest: /tmp
+    - name: unarchive node exporter
       unarchive:
-        src: "/tmp/node_exporter.tar.gz"
-        dest: "/opt"
-        remote_src: true
-        extra_opts: [--strip-components=1]
-        creates: "/opt/node_exporter"
-
-    - name: Create Node Exporter user
-      user:
-        name: node_exporter
-        system: yes
-        shell: /bin/false
-
-    - name: Set ownership and permissions
-      file:
-        path: "/opt/node_exporter"
-        owner: node_exporter
-        group: node_exporter
-        mode: "0755"
-
-    - name: Configure Node Exporter systemd service
+        remote_src: yes
+        src: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+        dest: /tmp
+    - name: move node exporter to /usr/local/bin
+      copy:
+        src: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter
+        dest: /usr/local/bin/node_exporter
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0755
+    - name: install unit file to systemd
+      template:
+        src: templates/node_exporter.service.j2
+        dest: /etc/systemd/system/node_exporter.service
+        owner: root
+        group: root
+        mode: 0600
+    - name: configure systemd to use service
       systemd:
-        name: node_exporter
         daemon_reload: yes
         enabled: yes
-        state: reloaded
-        #user: node_exporter
-        #executable: /opt/node_exporter/node_exporter
-
-    - name: Open port for Node Exporter
-      ufw:
-        rule: allow
-        port: 9100
-        state: enabled
+        state: started
+        name: node_exporter.service
