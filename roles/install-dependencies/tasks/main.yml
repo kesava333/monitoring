@@ -1,6 +1,4 @@
 ---
-name: Install dependencies
- tasks:
    - name: Install Python packages from requirements.txt
      pip:
        requirements: roles/install-dependencies/tasks/requirements.txt
