@@ -1,0 +1,8 @@
+---
+- name: Install Python dependencies
+  hosts: your_hosts
+  become: true
+  tasks:
+    - name: Install Python packages from requirements.txt
+      pip:
+        requirements: /path/to/requirements.txt

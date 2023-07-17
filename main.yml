@@ -1,0 +1,10 @@
+---
+- name: Install Node exporter
+  hosts: all
+  become: true
+  vars:
+    ansible_user: ubuntu
+  roles:
+    - role: install-dependencies
+    - role: install-node-exporter
+    # Add more roles as needed
