@@ -6,4 +6,4 @@
        state: present
    - name: Install Python packages from requirements.txt
      pip:
-       requirements: ~/roles/install-dependencies/tasks/requirements.txt
+       requirements: /home/ubuntu/monitoring/roles/install-dependencies/tasks/requirements.txt
