@@ -4,4 +4,4 @@
   tasks:
     - name: Install Python packages from requirements.txt
       pip:
-        requirements: /path/to/requirements.txt
+        requirements: roles/install-dependencies/tasks/requirements.txt
