@@ -30,7 +30,7 @@
         name: node_exporter
         daemon_reload: yes
         enabled: yes
-        state: restarted
+        state: started
         #user: node_exporter
         #executable: /opt/node_exporter/node_exporter
 
