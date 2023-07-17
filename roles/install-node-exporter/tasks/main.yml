@@ -31,7 +31,7 @@
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        user: node_exporter
+        #user: node_exporter
         #executable: /opt/node_exporter/node_exporter
 
     - name: Open port for Node Exporter
