@@ -3,6 +3,6 @@
   hosts: localhost
   become: true
   roles:
-    - role: install_requiremnets
+    - role: install-dependencies
     - role: install-node-exporter
     # Add more roles as needed
